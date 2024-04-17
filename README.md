@@ -1,7 +1,7 @@
 # Go Meets
 
 <div align="center">
-	<img height="300px" src="assets/icon.jpg">
+	<img height="300px" src="assets/icon.png">
 </div>
 
 ## What
