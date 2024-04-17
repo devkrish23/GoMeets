@@ -1,4 +1,4 @@
-@import "bulma/css/bulma.min.css";
+@import "bulma.min.css";
 @import "fonts.css";
 
 html {
@@ -20,7 +20,7 @@ hr {
 }
 
 body {
-  background-color: #eceff4;
+  background-color: 04080f;
   min-height: 100%;
   font-size: large;
 }
