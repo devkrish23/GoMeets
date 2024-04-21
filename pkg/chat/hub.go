@@ -16,7 +16,7 @@ func NewHub() *Hub {
 	}
 }
 
-func (h *Hub) Run() {
+func (h *Hub) Run() { // continuously listens on the broadcast, register, unregister channels
 	for {
 		select {
 		case client := <-h.register:

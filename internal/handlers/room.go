@@ -16,10 +16,10 @@ import (
 )
 
 func RoomCreate(c *fiber.Ctx) error {
-	return c.Redirect(fmt.Sprintf("/room/%s", guuid.New().String()))
+	return c.Redirect(fmt.Sprintf("/room/%s", guuid.New().String())) // redirects client request of new room to uuid room
 }
 
-func Room(c *fiber.Ctx) error {
+func Room(c *fiber.Ctx) error { // function to join a room, creates or gets the room and renders the peer html template
 	uuid := c.Params("uuid")
 	if uuid == "" {
 		c.Status(400)
@@ -53,24 +53,26 @@ func RoomWebsocket(c *websocket.Conn) {
 }
 
 func createOrGetRoom(uuid string) (string, string, *w.Room) {
-	w.RoomsLock.Lock()
-	defer w.RoomsLock.Unlock()
+	// if the uuid is present for the room then retrievs it else creates one before the response
+	w.RoomsLock.Lock() // lock rooms map to prevent concurrent access from multiple goroutines
+	defer w.RoomsLock.Unlock() // ensure that the lock is released when the function exists
 
-	h := sha256.New()
+	h := sha256.New() // unique identifier for the room stream
 	h.Write([]byte(uuid))
 	suuid := fmt.Sprintf("%x", h.Sum(nil))
 
 	if room := w.Rooms[uuid]; room != nil {
 		if _, ok := w.Streams[suuid]; !ok {
+			// if the stream doesn't exists, associate with the room
 			w.Streams[suuid] = room
 		}
 		return uuid, suuid, room
 	}
 
-	hub := chat.NewHub()
-	p := &w.Peers{}
+	hub := chat.NewHub() // If the room doesn't exist, create a new hub for chat communication
+	p := &w.Peers{} // Create a new Peers instance to manage WebRTC peer connections
 	p.TrackLocals = make(map[string]*webrtc.TrackLocalStaticRTP)
-	room := &w.Room{
+	room := &w.Room{  // Create a new Room instance with the created hub and peers
 		Peers: p,
 		Hub:   hub,
 	}

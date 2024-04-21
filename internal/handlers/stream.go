@@ -69,7 +69,7 @@ func StreamViewerWebsocket(c *websocket.Conn) {
 	}
 	w.RoomsLock.Unlock()
 }
-
+// updates our number of users connected in the room
 func viewerConn(c *websocket.Conn, p *w.Peers) {
 	ticker := time.NewTicker(1 * time.Second)
 	defer ticker.Stop()

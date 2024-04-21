@@ -96,6 +96,7 @@ video {
   margin-left: 10px;
   border-radius: 5%;
   word-wrap: break-word;
+  background: white;
 }
 
 .chat .send {
