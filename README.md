@@ -30,21 +30,21 @@ Free, forever.
 
 ## Installation
 In visual Studio Go to Extensions and install Go in MarketPlace
-<div align="center">
-	<img height="300px" src="assets/vs.png">
+<div align="left">
+	<img height="300px" src="assets/vs.png"><br>
 </div>
 
 ## Steps to use "Go Meets"
 Go to the project Location 
 Execute the below command
   go run ./cmd/main.go
-<div align="center">
-	<img height="300px" src="assets/exec.png">
+<div align="left">
+	<img height="300px" src="assets/exec.png "><br>
 </div>
 
 Now you can view the page below
-<div align="center">
-	<img height="300px" src="assets/fe.png">
+<div align="left">
+	<img height="300px" src="assets/fe.png"><br>
 </div>
 
 you can create a room 
@@ -73,4 +73,13 @@ Here’s a simple explanation of what the 'go.sum' file does and why it's import
 3. Dependency Integrity: When you build your project, Go checks the hashes in the `go.sum` file against the hashes of the downloaded modules. If they don't match, Go will report an error and stop the build, alerting you to a potential integrity issue with your dependencies.
 
 4. No Manual Editing: The `go.sum` file is automatically managed by the Go tools. You generally should not need to manually edit this file. When you add, update, or remove dependencies using Go commands like `go get` or `go mod tidy`, Go automatically updates the `go.sum` file.
+
+## Docker setup alternative
+Run the below commands to run docker image of Go meets
+Pull gomeets-server docker image from docker hub: `docker pull devkrish12/gomeets-server:v1.0`
+Run docker image: `docker run --name gomeets-server -p 8080:8080 devkrish12/gomeets-server:v1.0`
+
+<div align="left">
+	<img height="300px" src="assets/docker.png"><br>
+</div>
 
